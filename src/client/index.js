@@ -25,7 +25,31 @@ class Client {
 
   send(name, params) {
     console.log(name, params);
-    
+    return new Promise((resolve, reject) => {
+      const request = http.request(this.options, resp => {
+        const data = [];
+        resp.on("data", chunk => {
+          data.push(chunk);
+        });
+
+        resp.on("end", () => {
+          try {
+            const parseData = JSON.parse(data.join(""));
+            resolve(parsedData);
+          } catch (e) {
+            reject("Could not parse the response from the server");
+          }
+        });
+      });
+      request.write(
+        JSON.stringify({
+          jsonrpc: "2.0",
+          method: name,
+          params
+        })
+      );
+      request.end();
+    });
   }
 }
 

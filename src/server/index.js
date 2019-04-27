@@ -21,11 +21,43 @@ class Server {
   }
 
   handleRequest(req, res) {
-    console.log(req);
+    console.log(req.method);
+    let body = "";
+    req.on("data", chunk => {
+      body += chunk;
+    });
+
+    req.on("end", () => {
+      console.log("END>>>");
+      req.body = JSON.parse(body);
+      console.log("DATA: ", req.body);
+
+      res.end();
+    });
+  }
+
+  registerHandler(name, handler) {
+    this.handlers[name] = handler;
+  }
+
+  getHandler(name) {
+    return this.handlers[name];
   }
 }
 
-const handler = {};
+const handler = {
+  set(server, name, handlerFn) {
+    server.registerHandler(name, handlerFn);
+    return true;
+  },
+
+  get(server, name) {
+    if (name === "closeserver") {
+      return server.server.close.bind(server.server);
+    }
+    return server.getHandler(name);
+  }
+};
 
 function createServer(options) {
   const server = new Server(options);
