@@ -31,7 +31,7 @@ class Client {
 				resp.on('end', () => {
 					try {
 						const parsedData = JSON.parse(data.join(''));
-						console.log("ParsedData: ", parsedData.clientResponse);
+						console.log("ParsedData: ", parsedData);
 						resolve(parsedData.result);
 					} catch (e) {
 						reject('Could not parse the response from the server');

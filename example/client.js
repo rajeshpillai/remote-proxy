@@ -8,8 +8,8 @@ async function handleClientRequest() {
       console.log(`First result: ${data}`);
     });
 
-    // const result2 = await remote.add(10, 10);
-    // console.log(`Second result: ${result2}`);
+    const result2 = await remote.add(10, 10);
+    console.log(`Second result: ${result2}`);
   } catch (error) {
     console.log(`Catched Error: ${error}`);
   }
