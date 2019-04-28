@@ -4,12 +4,14 @@ const remote = require("../src").createClient({
 
 async function handleClientRequest() {
   try {
-    const result1 = await remote.add(5, 2);
-    console.log(`First result: ${result1}`);
-    const result2 = await remote.add(10, 10);
-    console.log(`Second result: ${result2}`);
+    const result1 = remote.add(5, 2).then((data) => {
+      console.log(`First result: ${data}`);
+    });
+
+    // const result2 = await remote.add(10, 10);
+    // console.log(`Second result: ${result2}`);
   } catch (error) {
-    console.log(`Catched Error: ${error.message}`);
+    console.log(`Catched Error: ${error}`);
   }
 }
 
