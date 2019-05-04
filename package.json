@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon example/server.js"
   },
-  "keywords": [],
+  "keywords": ["remote", "remote-proxy"],
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }
